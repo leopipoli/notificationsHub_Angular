@@ -37,21 +37,49 @@ export class SetupEmailComponent {
     private form: FormBuilder,
     private route: ActivatedRoute,
     private setupEmailService: SetupEmailService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar) { 
+      this.setupEmailForm = this.form.group({
+        nomeServidorSMTP: ['', Validators.required],
+        portaEnvio: ['', Validators.required],
+        login: ['', Validators.required],
+        senha: ['', Validators.required],
+        nomeRemetente: ['', Validators.required],
+        emailRemetente: ['', [Validators.required, Validators.email]]
+      });
+    }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.idConfiguracao = params.get('idConfiguracao');
     });
 
-    this.setupEmailForm = this.form.group({
-      nomeServidorSMTP: ['', Validators.required],
-      portaEnvio: ['', Validators.required],
-      login: ['', Validators.required],
-      senha: ['', Validators.required],
-      nomeRemetente: ['', Validators.required],
-      emailRemetente: ['', [Validators.required, Validators.email]]
+    this.route.paramMap.subscribe(params => {
+      this.idConfiguracao = params.get('idConfiguracao');
     });
+
+    if(this.idConfiguracao != "null"){
+      this.setupEmailService.GetById(parseInt(this.idConfiguracao ?? "", 10)).subscribe(
+        (setup: SetupEmailModel) => {
+          if(setup){
+            this.idSetupEmail = setup.idSetupEmail ?? null;
+            this.setupEmailForm.patchValue({
+              nomeServidorSMTP: setup.nomeServidorSMTP,
+              portaEnvio: setup.portaEnvio,
+              login: setup.login,
+              senha: setup.senha,
+              nomeRemetente: setup.nomeRemetente,
+              emailRemetente: setup.emailRemetente,
+            });
+          }
+          else{
+            this.snackBar.open("Não foram localizadas configurações para essa seção.", "Fechar")
+          }
+        },
+        error => {
+          console.error('Erro na operação', error);
+        }
+      )
+    }
   }
 
   salvar() {

@@ -1,11 +1,11 @@
-<form [formGroup]="setupSMSForm" (ngSubmit)="salvar()">
+<form [formGroup]="setupSmsForm" (ngSubmit)="salvar()">
 
-    <!-- Provedor SMS -->
+    <!-- Provedor Sms -->
     <mat-form-field class="forms">
-      <mat-label>Provedor SMS</mat-label>
-      <input matInput formControlName="provedorSMS" />
-      <mat-error *ngIf="setupSMSForm.get('provedorSMS')?.hasError('required')">
-        Provedor SMS é obrigatório
+      <mat-label>Provedor Sms</mat-label>
+      <input matInput formControlName="provedorSms" />
+      <mat-error *ngIf="setupSmsForm.get('provedorSms')?.hasError('required')">
+        Provedor Sms é obrigatório
       </mat-error>
     </mat-form-field>
   
@@ -13,7 +13,7 @@
     <mat-form-field class="forms">
       <mat-label>Login</mat-label>
       <input matInput formControlName="login" />
-      <mat-error *ngIf="setupSMSForm.get('login')?.hasError('required')">
+      <mat-error *ngIf="setupSmsForm.get('login')?.hasError('required')">
         Login é obrigatório
       </mat-error>
     </mat-form-field>
@@ -22,7 +22,7 @@
     <mat-form-field class="forms">
       <mat-label>Senha</mat-label>
       <input matInput type="password" formControlName="senha" />
-      <mat-error *ngIf="setupSMSForm.get('senha')?.hasError('required')">
+      <mat-error *ngIf="setupSmsForm.get('senha')?.hasError('required')">
         Senha é obrigatória
       </mat-error>
     </mat-form-field>
