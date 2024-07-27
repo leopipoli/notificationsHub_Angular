@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { ConfiguracaoModel } from '../../configuracao/models/configuracao.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HomeService {
+export class CadastroService {
   controller!: string;
 
   constructor(private http: HttpClient) { 
     this.controller = "Configuracao"
   }
 
-  GetAll(){
-    return this.http.get<Array<ConfiguracaoModel>>(`${environment.apiUrl}/${this.controller}/GetAll`)
+  Post(data: any): Observable<number> {
+    return this.http.post<number>(`${environment.apiUrl}/${this.controller}/Post`, data);
   }
 }

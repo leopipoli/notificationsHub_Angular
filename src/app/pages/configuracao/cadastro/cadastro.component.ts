@@ -4,6 +4,7 @@ import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/in
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { CadastroService } from '../services/cadastro.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -24,7 +25,10 @@ import { CommonModule } from '@angular/common';
 export class CadastroComponent {
   configuracaoForm: FormGroup;
 
-  constructor(private form: FormBuilder) {
+  constructor(
+    private form: FormBuilder,
+    private cadastroService: CadastroService
+  ) {
     this.configuracaoForm = this.form.group({
       nomeAplicativo: ['', [Validators.required]],
       setupWeb: [false],
@@ -33,9 +37,18 @@ export class CadastroComponent {
     });
   }
 
-    salvar() {
-     if (this.configuracaoForm.valid) {
-       console.log('Formulário Enviado', this.configuracaoForm.value);
-     }
-   }
+  salvar() {
+    if (this.configuracaoForm.valid) {
+    this.cadastroService.Post(this.configuracaoForm.value).subscribe(
+      (idConfiguracao: number) => {
+        console.log(idConfiguracao);
+      },
+      error => {
+        console.error('Erro ao obter configuração', error);
+      }
+    )
+
+      console.log('Formulário Enviado', this.configuracaoForm.value);
+    }
+  }
 }

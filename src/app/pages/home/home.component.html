@@ -10,9 +10,15 @@
         </mat-expansion-panel-header>
         <mat-list>
           <a mat-list-item routerLink="/Cadastro">Cadasto de Aplicativo</a>
-          <a mat-list-item routerLink="/SetupWeb">Configuração Web</a>
-          <a mat-list-item routerLink="/SetupEmail">Configuração E-mail</a>
-          <a mat-list-item routerLink="/SetupSms">Configuração SMS</a>
+          <a mat-list-item [routerLink]="!menuSetupWebActive ? null : '/SetupWeb'" [ngClass]="{'disabled-link': !menuSetupWebActive}">
+            Configuração Web
+          </a>
+          <a mat-list-item [routerLink]="!menuSetupEmailActive ? null : '/SetupEmail'" [ngClass]="{'disabled-link': !menuSetupEmailActive}">
+            Configuração E-mail
+          </a>
+          <a mat-list-item [routerLink]="!menuSetupSmsActive ? null : '/SetupSms'" [ngClass]="{'disabled-link': !menuSetupSmsActive}">
+            Configuração SMS
+          </a>
         </mat-list>
       </mat-expansion-panel>
 
@@ -37,7 +43,7 @@
       </button>
       <mat-form-field appearance="outline" class="formFieldAplicativos">
         <mat-label style="color:#fff">Nome do Aplicativo</mat-label>
-        <mat-select style="color:#fff!important">
+        <mat-select matNativeControl (selectionChange)="onSelectionChange($event)" style="color:#fff!important">
           @for (itemConfig of listConfiguracao; track listConfiguracao) {
             <mat-option [value]="itemConfig.idConfiguracao">{{itemConfig.nomeAplicativo}}</mat-option>
           }
