@@ -32,7 +32,7 @@ export class CadastroComponent implements OnInit{
     private form: FormBuilder,
     private route: ActivatedRoute,
     private cadastroService: CadastroService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
   ) {
     this.configuracaoForm = this.form.group({
       nomeAplicativo: ['', [Validators.required]],
@@ -50,11 +50,12 @@ export class CadastroComponent implements OnInit{
 
   salvar() {
     if (this.configuracaoForm.valid) {
-    if(!this.idConfiguracao){
+    if(this.idConfiguracao == "null"){
       this.cadastroService.Post(this.configuracaoForm.value).subscribe(
         (idConfiguracao: number) => {
           if(idConfiguracao){
             this.snackBar.open("Salvo com sucesso.", "Fechar")
+            window.location.reload();
           }
           else{
             this.snackBar.open("Erro ao salvar.", "Fechar")
