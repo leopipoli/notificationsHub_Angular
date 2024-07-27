@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatError, MatFormField, MatInput, MatInputModule, MatLabel } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
@@ -17,14 +16,13 @@ import { SetupWebModel } from '../models/setupWeb.model';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInput,
+    MatInputModule,
     MatError,
     MatFormField,    
     MatLabel,
     MatCheckboxModule,
-    MatButtonModule,
-    MatInputModule,
-    MatFormFieldModule
+    MatButtonModule
+
   ],
   templateUrl: './setup-web.component.html',
   styleUrl: './setup-web.component.scss'
