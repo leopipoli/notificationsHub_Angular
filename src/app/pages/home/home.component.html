@@ -10,13 +10,13 @@
         </mat-expansion-panel-header>
         <mat-list>
           <a mat-list-item [routerLink]="['/Cadastro/', this.itemConfigSelect]">Cadasto de Aplicativo</a>
-          <a mat-list-item [routerLink]="!menuSetupWebActive ? null : '/SetupWeb'" [ngClass]="{'disabled-link': !menuSetupWebActive}">
+          <a mat-list-item [routerLink]="['/SetupWeb/', this.itemConfigSelect]" [ngClass]="{'disabled-link': !menuSetupWebActive}">
             Configuração Web
           </a>
-          <a mat-list-item [routerLink]="!menuSetupEmailActive ? null : '/SetupEmail'" [ngClass]="{'disabled-link': !menuSetupEmailActive}">
+          <a mat-list-item [routerLink]="['/SetupEmail/', this.itemConfigSelect]" [ngClass]="{'disabled-link': !menuSetupEmailActive}">
             Configuração E-mail
           </a>
-          <a mat-list-item [routerLink]="!menuSetupSmsActive ? null : '/SetupSms'" [ngClass]="{'disabled-link': !menuSetupSmsActive}">
+          <a mat-list-item [routerLink]="['/SetupSms/', this.itemConfigSelect]" [ngClass]="{'disabled-link': !menuSetupSmsActive}">
             Configuração SMS
           </a>
         </mat-list>

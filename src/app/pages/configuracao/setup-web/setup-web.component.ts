@@ -32,6 +32,7 @@ import { SetupWebModel } from '../models/setupWeb.model';
 export class SetupWebComponent {
   setupWebForm!: FormGroup;
   idConfiguracao: string | null = null;
+  idSetupWeb: number | null = null;
 
   constructor(
     private form: FormBuilder,
@@ -62,6 +63,7 @@ export class SetupWebComponent {
       this.setupWebService.GetById(parseInt(this.idConfiguracao ?? "", 10)).subscribe(
         (setup: SetupWebModel) => {
           if(setup){
+            this.idSetupWeb = setup.idSetupWeb ?? null;
             this.setupWebForm.patchValue({
               textoMensagemBoasVindas: setup.textoMensagemBoasVindas,
               textoMensagemPermissao: setup.textoMensagemPermissao,
@@ -76,7 +78,7 @@ export class SetupWebComponent {
             });
           }
           else{
-            this.snackBar.open("Erro ao carregar dados.", "Fechar")
+            this.snackBar.open("Não foram localizadas configurações para essa seção.", "Fechar")
           }
         },
         error => {
@@ -88,12 +90,12 @@ export class SetupWebComponent {
 
   salvar() {
     if (this.setupWebForm.valid) {
-    if(this.idConfiguracao == "null"){
-      this.setupWebService.Post(this.setupWebForm.value).subscribe(
+    if(this.idSetupWeb == null){
+      let model = this.preenchermodel();
+      this.setupWebService.Post(model).subscribe(
         (idConfiguracao: number) => {
           if(idConfiguracao){
             this.snackBar.open("Salvo com sucesso.", "Fechar")
-            window.location.reload();
           }
           else{
             this.snackBar.open("Erro ao salvar.", "Fechar")
@@ -104,10 +106,28 @@ export class SetupWebComponent {
         }
       )}
       else{
-        if(this.idConfiguracao){
+        if(this.idSetupWeb){
           this.snackBar.open("A edição de dados será disponibilizada no futuro.", "Fechar")
         }
       }
     }
+  }
+
+  preenchermodel(){
+    const setupModel: SetupWebModel = {
+      idConfiguracao: parseInt(this.idConfiguracao ?? "", 10),
+      nomeDoSite: this.setupWebForm.get('nomeDoSite')?.value,
+      enderecoDoSite: this.setupWebForm.get('enderecoDoSite')?.value,
+      imagemDoIcone: this.setupWebForm.get('imagemDoIcone')?.value,
+      textoMensagemPermissao: this.setupWebForm.get('textoMensagemPermissao')?.value,
+      textoBotaoPermitir: this.setupWebForm.get('textoBotaoPermitir')?.value,
+      textoBotaoNegar: this.setupWebForm.get('textoBotaoNegar')?.value,
+      tituloNotificacaoBoasVindas: this.setupWebForm.get('tituloNotificacaoBoasVindas')?.value,
+      textoMensagemBoasVindas: this.setupWebForm.get('textoMensagemBoasVindas')?.value,
+      habilitarLinkDestino: this.setupWebForm.get('habilitarLinkDestino')?.value,
+      enderecoLinkDestino: this.setupWebForm.get('enderecoLinkDestino')?.value
+    };
+
+    return setupModel;
   }
 }

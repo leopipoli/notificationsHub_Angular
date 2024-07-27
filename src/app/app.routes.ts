@@ -9,10 +9,10 @@ import { EnvioManualComponent } from './pages/notificacao/envio-manual/envio-man
 
 export const routes: Routes = [
   { path: 'Cadastro/:idConfiguracao', component: CadastroComponent },
-  { path: 'SetupWeb', component: SetupWebComponent },
-  { path: 'SetupEmail', component: SetupEmailComponent },
-  { path: 'SetupSms', component: SetupSmsComponent },
-  { path: 'EnvioManual', component: EnvioManualComponent },
-  { path: 'Historico', component: HistoricoComponent },
+  { path: 'SetupWeb/:idConfiguracao', component: SetupWebComponent },
+  { path: 'SetupEmail/:idConfiguracao', component: SetupEmailComponent },
+  { path: 'SetupSms/:idConfiguracao', component: SetupSmsComponent },
+  { path: 'EnvioManual/:idConfiguracao', component: EnvioManualComponent },
+  { path: 'Historico/:idConfiguracao', component: HistoricoComponent },
 ];
   
