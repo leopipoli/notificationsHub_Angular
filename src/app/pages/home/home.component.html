@@ -38,8 +38,8 @@
       <mat-form-field appearance="outline" class="formFieldAplicativos">
         <mat-label style="color:#fff">Nome do Aplicativo</mat-label>
         <mat-select style="color:#fff!important">
-          @for (food of foods; track food) {
-            <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+          @for (itemConfig of listConfiguracao; track listConfiguracao) {
+            <mat-option [value]="itemConfig.idConfiguracao">{{itemConfig.nomeAplicativo}}</mat-option>
           }
         </mat-select>
       </mat-form-field>

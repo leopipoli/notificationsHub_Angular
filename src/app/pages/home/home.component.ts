@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 
 import {FormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
+import { ItemConfiguracao } from './models/ItemConfiguracao';
+import { HomeService } from './services/home.service';
 
 interface Food {
   value: string;
@@ -33,14 +35,23 @@ interface Food {
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   @ViewChild('sidenav') sidenav!: MatSidenav;
-  sidenavOpen = false; // Variable to track the state of the sidenav
-    foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
-  ];
+  sidenavOpen = false;
+  listConfiguracao!: Array<ItemConfiguracao>;
+
+  constructor(private homeService: HomeService){}
+
+  ngOnInit(){
+    this.homeService.GetAll().subscribe(
+      (data: Array<ItemConfiguracao>) => {
+        this.listConfiguracao = data;
+      },
+      error => {
+        console.error('Erro ao obter configuração', error);
+      }
+    )
+  }
   
   toggleSidenav(): void {
     this.sidenav.toggle();
