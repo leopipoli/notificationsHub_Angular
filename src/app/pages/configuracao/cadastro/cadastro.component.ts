@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { CadastroService } from '../services/cadastro.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { ConfiguracaoModel } from '../models/configuracao.model';
 
 @Component({
   selector: 'app-cadastro',
@@ -46,7 +47,27 @@ export class CadastroComponent implements OnInit{
     this.route.paramMap.subscribe(params => {
       this.idConfiguracao = params.get('idConfiguracao');
     });
-  }
+
+    if(this.idConfiguracao != "null"){
+      this.cadastroService.GetById(parseInt(this.idConfiguracao ?? "", 10)).subscribe(
+        (config: ConfiguracaoModel) => {
+          if(config){
+            this.configuracaoForm.patchValue({
+              nomeAplicativo: config.nomeAplicativo,
+              setupWeb: config.setupWeb,
+              setupEmail: config.setupEmail,
+              setupSMS: config.setupSMS
+            });
+          }
+          else{
+            this.snackBar.open("Erro ao carregar dados.", "Fechar")
+          }
+        },
+        error => {
+          console.error('Erro na operação', error);
+        }
+      )}
+    }
 
   salvar() {
     if (this.configuracaoForm.valid) {
@@ -65,12 +86,11 @@ export class CadastroComponent implements OnInit{
           console.error('Erro na operação', error);
         }
       )}
-    }
-    else{
-      if(this.idConfiguracao){
-        this.snackBar.open("A edição de dados será disponibilizada no futuro.", "Fechar")
+      else{
+        if(this.idConfiguracao){
+          this.snackBar.open("A edição de dados será disponibilizada no futuro.", "Fechar")
+        }
       }
     }
-
   }
 }
