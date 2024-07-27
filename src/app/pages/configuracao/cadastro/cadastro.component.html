@@ -1,1 +1,22 @@
-<p>cadastro works!</p>
+<form [formGroup]="configuracaoForm" (ngSubmit)="salvar()">
+
+    <mat-form-field class="forms">
+      <mat-label>Nome Aplicativo</mat-label>
+      <input matInput formControlName="nomeAplicativo" />
+      <mat-error *ngIf="configuracaoForm.get('nomeAplicativo')?.hasError('required')">
+        Nome do Aplicativo é obrigatório
+      </mat-error>
+    </mat-form-field>
+  
+    <div class="forms">
+      <mat-checkbox formControlName="setupWeb">Configuração Web</mat-checkbox>
+      <mat-checkbox formControlName="setupEmail">Configuração Email</mat-checkbox>
+      <mat-checkbox formControlName="setupSMS">Configuração SMS</mat-checkbox>
+    </div>
+  
+    <div class="divBtnSave">
+      <button mat-raised-button color="primary" type="submit">Salvar</button>
+    </div>
+  
+  </form>
+  

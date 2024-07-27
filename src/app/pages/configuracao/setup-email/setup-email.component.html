@@ -1,1 +1,62 @@
-<p>setup-email works!</p>
+<form [formGroup]="setupEmailForm" (ngSubmit)="salvar()">
+
+  <!-- Nome do Servidor SMTP -->
+  <mat-form-field class="forms">
+    <mat-label>Nome do Servidor SMTP</mat-label>
+    <input matInput formControlName="nomeServidorSMTP" />
+    <mat-error *ngIf="setupEmailForm.get('nomeServidorSMTP')?.hasError('required')">
+      Nome do Servidor SMTP é obrigatório
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Porta de Envio -->
+  <mat-form-field class="forms">
+    <mat-label>Porta de Envio</mat-label>
+    <input matInput type="number" formControlName="portaEnvio" />
+    <mat-error *ngIf="setupEmailForm.get('portaEnvio')?.hasError('required')">
+      Porta de Envio é obrigatória
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Login -->
+  <mat-form-field class="forms">
+    <mat-label>Login</mat-label>
+    <input matInput formControlName="login" />
+    <mat-error *ngIf="setupEmailForm.get('login')?.hasError('required')">
+      Login é obrigatório
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Senha -->
+  <mat-form-field class="forms">
+    <mat-label>Senha</mat-label>
+    <input matInput type="password" formControlName="senha" />
+    <mat-error *ngIf="setupEmailForm.get('senha')?.hasError('required')">
+      Senha é obrigatória
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Nome do Remetente -->
+  <mat-form-field class="forms">
+    <mat-label>Nome do Remetente</mat-label>
+    <input matInput formControlName="nomeRemetente" />
+    <mat-error *ngIf="setupEmailForm.get('nomeRemetente')?.hasError('required')">
+      Nome do Remetente é obrigatório
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Email do Remetente -->
+  <mat-form-field class="forms">
+    <mat-label>Email do Remetente</mat-label>
+    <input matInput formControlName="emailRemetente" />
+    <mat-error *ngIf="setupEmailForm.get('emailRemetente')?.hasError('required')">
+      Email do Remetente é obrigatório
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Botão Salvar -->
+  <div class="divBtnSave">
+    <button mat-raised-button color="primary" type="submit">Salvar</button>
+  </div>
+
+</form>

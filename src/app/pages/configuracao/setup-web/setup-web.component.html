@@ -1,1 +1,74 @@
-<p>setup-web works!</p>
+<form [formGroup]="setupWebForm" (ngSubmit)="salvar()">
+
+    <!-- Texto Mensagem Boas Vindas -->
+    <mat-form-field class="forms" style="width: 96%;">
+        <mat-label>Texto Mensagem Boas Vindas</mat-label>
+        <textarea matInput formControlName="textoMensagemBoasVindas"></textarea>
+      </mat-form-field>
+
+    <!-- Texto Mensagem Permissão -->
+    <mat-form-field class="forms" style="width: 96%;">
+        <mat-label>Texto Mensagem Permissão</mat-label>
+        <textarea matInput formControlName="textoMensagemPermissao"></textarea>
+      </mat-form-field>
+
+    <!-- Nome do Site -->
+    <mat-form-field class="forms">
+      <mat-label>Nome do Site</mat-label>
+      <input matInput formControlName="nomeDoSite" />
+      <mat-error *ngIf="setupWebForm.get('nomeDoSite')?.hasError('required')">
+        Nome do Site é obrigatório
+      </mat-error>
+    </mat-form-field>
+  
+    <!-- Endereço do Site -->
+    <mat-form-field class="forms">
+      <mat-label>Endereço do Site</mat-label>
+      <input matInput formControlName="enderecoDoSite" />
+      <mat-error *ngIf="setupWebForm.get('enderecoDoSite')?.hasError('required')">
+        Endereço do Site é obrigatório
+      </mat-error>
+    </mat-form-field>
+  
+    <!-- Imagem do Ícone -->
+    <mat-form-field class="forms">
+      <mat-label>Imagem do Ícone</mat-label>
+      <input matInput formControlName="imagemDoIcone" />
+    </mat-form-field>
+  
+    <!-- Texto Botão Permitir -->
+    <mat-form-field class="forms">
+      <mat-label>Texto Botão Permitir</mat-label>
+      <input matInput formControlName="textoBotaoPermitir" />
+    </mat-form-field>
+  
+    <!-- Texto Botão Negar -->
+    <mat-form-field class="forms">
+      <mat-label>Texto Botão Negar</mat-label>
+      <input matInput formControlName="textoBotaoNegar" />
+    </mat-form-field>
+  
+    <!-- Título Notificação Boas Vindas -->
+    <mat-form-field class="forms">
+      <mat-label>Título Notificação Boas Vindas</mat-label>
+      <input matInput formControlName="tituloNotificacaoBoasVindas" />
+    </mat-form-field>
+  
+    <!-- Habilitar Link de Destino -->
+    <!-- <mat-form-field class="forms">
+      <mat-checkbox formControlName="habilitarLinkDestino">Habilitar Link de Destino</mat-checkbox>
+    </mat-form-field> -->
+  
+    <!-- Endereço Link de Destino -->
+    <mat-form-field class="forms">
+      <mat-label>Endereço Link de Destino</mat-label>
+      <input matInput formControlName="enderecoLinkDestino" />
+    </mat-form-field>
+
+    <!-- Botão Salvar -->
+    <div class="divBtnSave">
+      <button mat-raised-button color="primary" type="submit">Salvar</button>
+    </div>
+  
+  </form>
+  

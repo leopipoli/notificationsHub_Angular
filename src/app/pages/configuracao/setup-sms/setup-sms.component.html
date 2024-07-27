@@ -1,1 +1,36 @@
-<p>setup-sms works!</p>
+<form [formGroup]="setupSMSForm" (ngSubmit)="salvar()">
+
+    <!-- Provedor SMS -->
+    <mat-form-field class="forms">
+      <mat-label>Provedor SMS</mat-label>
+      <input matInput formControlName="provedorSMS" />
+      <mat-error *ngIf="setupSMSForm.get('provedorSMS')?.hasError('required')">
+        Provedor SMS é obrigatório
+      </mat-error>
+    </mat-form-field>
+  
+    <!-- Login -->
+    <mat-form-field class="forms">
+      <mat-label>Login</mat-label>
+      <input matInput formControlName="login" />
+      <mat-error *ngIf="setupSMSForm.get('login')?.hasError('required')">
+        Login é obrigatório
+      </mat-error>
+    </mat-form-field>
+  
+    <!-- Senha -->
+    <mat-form-field class="forms">
+      <mat-label>Senha</mat-label>
+      <input matInput type="password" formControlName="senha" />
+      <mat-error *ngIf="setupSMSForm.get('senha')?.hasError('required')">
+        Senha é obrigatória
+      </mat-error>
+    </mat-form-field>
+  
+    <!-- Botão Salvar -->
+    <div class="divBtnSave">
+      <button mat-raised-button color="primary" type="submit">Salvar</button>
+    </div>
+  
+  </form>
+  
