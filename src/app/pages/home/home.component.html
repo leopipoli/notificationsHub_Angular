@@ -1,0 +1,43 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" [style.backgroundColor]="'#353c50'" class="sidenav">
+    <mat-toolbar color="#fff">Menu</mat-toolbar>
+    <mat-nav-list>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Configurações
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list>
+          <mat-list-item>Cadasto</mat-list-item>
+          <mat-list-item>Setup Web</mat-list-item>
+          <mat-list-item>Setup E-mail</mat-list-item>
+          <mat-list-item>Setup SMS</mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title color="primary">
+            Notificações
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list>
+          <mat-list-item>Envio Manual</mat-list-item>
+          <mat-list-item>Histórico</mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="toggleSidenav()">
+        <mat-icon>{{ sidenavOpen ? 'menu_open' : 'menu' }}</mat-icon>
+      </button>
+    </mat-toolbar>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
