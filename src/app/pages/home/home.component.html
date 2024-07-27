@@ -9,10 +9,10 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <mat-list>
-          <mat-list-item>Cadasto</mat-list-item>
-          <mat-list-item>Setup Web</mat-list-item>
-          <mat-list-item>Setup E-mail</mat-list-item>
-          <mat-list-item>Setup SMS</mat-list-item>
+          <a mat-list-item routerLink="/Cadastro">Cadasto</a>
+          <a mat-list-item routerLink="/Cadastro">Setup Web</a>
+          <a mat-list-item routerLink="/Cadastro">Setup E-mail</a>
+          <a mat-list-item routerLink="/Cadastro">Setup SMS</a>
         </mat-list>
       </mat-expansion-panel>
 
@@ -23,8 +23,8 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <mat-list>
-          <mat-list-item>Envio Manual</mat-list-item>
-          <mat-list-item>Histórico</mat-list-item>
+          <a mat-list-item>Envio Manual</a>
+          <a mat-list-item>Histórico</a>
         </mat-list>
       </mat-expansion-panel>
     </mat-nav-list>
@@ -36,8 +36,8 @@
         <mat-icon>{{ sidenavOpen ? 'menu_open' : 'menu' }}</mat-icon>
       </button>
     </mat-toolbar>
+    <div class="content">
+      <router-outlet />
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-
-

@@ -4,6 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatExpansionModule,
     MatListModule,
     MatToolbarModule,
-    MatIconModule],
+    MatIconModule,
+    RouterLink, 
+    RouterOutlet],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
