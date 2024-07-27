@@ -35,6 +35,14 @@
       <button mat-icon-button (click)="toggleSidenav()">
         <mat-icon>{{ sidenavOpen ? 'menu_open' : 'menu' }}</mat-icon>
       </button>
+      <mat-form-field appearance="outline" class="formFieldAplicativos">
+        <mat-label style="color:#fff">Nome do Aplicativo</mat-label>
+        <mat-select style="color:#fff!important">
+          @for (food of foods; track food) {
+            <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
     </mat-toolbar>
     <div class="content">
       <router-outlet />
