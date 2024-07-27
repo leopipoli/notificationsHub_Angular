@@ -85,6 +85,7 @@ export class CadastroComponent implements OnInit{
         },
         error => {
           console.error('Erro na operação', error);
+          this.snackBar.open("Erro ao salvar.", "Fechar")
         }
       )}
       else{

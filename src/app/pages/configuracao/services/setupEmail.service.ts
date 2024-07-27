@@ -18,7 +18,7 @@ export class SetupEmailService {
     return this.http.get<SetupEmailModel>(`${environment.apiUrl}/${this.controller}/GetById/${id}`);
   }
 
-  Post(data: any): Observable<number> {
+  Post(data: SetupEmailModel): Observable<number> {
     return this.http.post<number>(`${environment.apiUrl}/${this.controller}/Post`, data);
   }
 }

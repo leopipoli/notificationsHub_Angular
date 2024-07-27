@@ -18,7 +18,7 @@ export class SetupWebService {
     return this.http.get<SetupWebModel>(`${environment.apiUrl}/${this.controller}/GetById/${id}`);
   }
 
-  Post(data: any): Observable<number> {
+  Post(data: SetupWebModel): Observable<number> {
     return this.http.post<number>(`${environment.apiUrl}/${this.controller}/Post`, data);
   }
 }

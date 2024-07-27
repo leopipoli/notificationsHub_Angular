@@ -69,6 +69,7 @@ export class SetupEmailComponent {
         },
         error => {
           console.error('Erro na operação', error);
+          this.snackBar.open("Erro ao salvar.", "Fechar")
         }
       )}
       else{
@@ -84,7 +85,7 @@ export class SetupEmailComponent {
       idConfiguracao: parseInt(this.idConfiguracao ?? "", 10),
       idSetupEmail: this.setupEmailForm.get('idSetupEmail')?.value,
       nomeServidorSMTP: this.setupEmailForm.get('nomeServidorSMTP')?.value,
-      portaEnvio: parseInt(this.setupEmailForm.get('portaEnvio')?.value ?? '', 10),
+      portaEnvio: this.setupEmailForm.get('portaEnvio')?.value,
       login: this.setupEmailForm.get('login')?.value,
       senha: this.setupEmailForm.get('senha')?.value,
       nomeRemetente: this.setupEmailForm.get('nomeRemetente')?.value,

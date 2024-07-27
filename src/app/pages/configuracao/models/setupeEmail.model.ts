@@ -2,7 +2,7 @@ export class SetupEmailModel {
     idSetupEmail?: number; // idSetupEmail é opcional
     idConfiguracao!: number;
     nomeServidorSMTP!: string;
-    portaEnvio!: number;
+    portaEnvio!: string;
     login!: string;
     senha!: string;
     nomeRemetente!: string;
