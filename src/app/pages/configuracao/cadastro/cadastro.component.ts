@@ -66,8 +66,9 @@ export class CadastroComponent implements OnInit{
         error => {
           console.error('Erro na operação', error);
         }
-      )}
+      )
     }
+  }
 
   salvar() {
     if (this.configuracaoForm.valid) {
