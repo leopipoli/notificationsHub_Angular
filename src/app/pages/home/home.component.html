@@ -9,7 +9,7 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <mat-list>
-          <a mat-list-item routerLink="/Cadastro">Cadasto de Aplicativo</a>
+          <a mat-list-item [routerLink]="['/Cadastro/', this.itemConfigSelect]">Cadasto de Aplicativo</a>
           <a mat-list-item [routerLink]="!menuSetupWebActive ? null : '/SetupWeb'" [ngClass]="{'disabled-link': !menuSetupWebActive}">
             Configuração Web
           </a>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { CadastroService } from '../services/cadastro.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -23,11 +24,13 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   templateUrl: './cadastro.component.html',
   styleUrl: './cadastro.component.scss'
 })
-export class CadastroComponent {
+export class CadastroComponent implements OnInit{
   configuracaoForm: FormGroup;
+  idConfiguracao: string | null = null;
 
   constructor(
     private form: FormBuilder,
+    private route: ActivatedRoute,
     private cadastroService: CadastroService,
     private snackBar: MatSnackBar
   ) {
@@ -36,6 +39,13 @@ export class CadastroComponent {
       setupWeb: [false],
       setupEmail: [false],
       setupSMS: [false]
+    });
+  }
+
+  ngOnInit(): void {
+    debugger
+    this.route.paramMap.subscribe(params => {
+      this.idConfiguracao = params.get('idConfiguracao');
     });
   }
 

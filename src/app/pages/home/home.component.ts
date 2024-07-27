@@ -13,11 +13,6 @@ import { HomeService } from './services/home.service';
 import { NgClass } from '@angular/common';
 import { ConfiguracaoModel } from '../configuracao/models/configuracao.model';
 
-interface Food {
-  value: string;
-  viewValue: string;
-}
-
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -38,7 +33,7 @@ interface Food {
 })
 export class HomeComponent implements OnInit {
   @ViewChild('sidenav') sidenav!: MatSidenav;
-  itemConfigSelect!: number;
+  itemConfigSelect: number | null = null;
   listConfiguracao!: Array<ConfiguracaoModel>;
   isDisabled = true;
   sidenavOpen = false;
@@ -66,7 +61,6 @@ export class HomeComponent implements OnInit {
 
   onSelectionChange(event: any) {
     this.itemConfigSelect = event.value;
-    debugger
     let configAtual = this.listConfiguracao.find(x => x.idConfiguracao == event.value)
     if(configAtual){
       this.menuSetupWebActive = configAtual.setupWeb;

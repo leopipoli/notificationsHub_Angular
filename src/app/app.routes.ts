@@ -8,7 +8,7 @@ import { HistoricoComponent } from './pages/notificacao/historico/historico.comp
 import { EnvioManualComponent } from './pages/notificacao/envio-manual/envio-manual.component';
 
 export const routes: Routes = [
-  { path: 'Cadastro', component: CadastroComponent },
+  { path: 'Cadastro/:idConfiguracao', component: CadastroComponent },
   { path: 'SetupWeb', component: SetupWebComponent },
   { path: 'SetupEmail', component: SetupEmailComponent },
   { path: 'SetupSms', component: SetupSmsComponent },
