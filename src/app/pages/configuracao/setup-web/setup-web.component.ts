@@ -89,7 +89,7 @@ export class SetupWebComponent {
   salvar() {
     if (this.setupWebForm.valid) {
     if(this.idSetupWeb == null){
-      let model = this.preenchermodel();
+      let model = this.preencherModel();
       this.setupWebService.Post(model).subscribe(
         (idConfiguracao: number) => {
           if(idConfiguracao){
@@ -111,7 +111,7 @@ export class SetupWebComponent {
     }
   }
 
-  preenchermodel(){
+  preencherModel(){
     const setupModel: SetupWebModel = {
       idConfiguracao: parseInt(this.idConfiguracao ?? "", 10),
       nomeDoSite: this.setupWebForm.get('nomeDoSite')?.value,

@@ -5,6 +5,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatError, MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
+import { SetupEmailService } from '../services/setupEmail.service';
+import { SetupEmailModel } from '../models/setupeEmail.model';
 
 @Component({
   selector: 'app-setup-email',
@@ -26,10 +30,20 @@ import { MatInput, MatInputModule } from '@angular/material/input';
 })
 export class SetupEmailComponent {
   setupEmailForm!: FormGroup;
+  idSetupEmail: number | null = null;
+  idConfiguracao: string | null = null;
 
-  constructor(private form: FormBuilder) { }
+  constructor(
+    private form: FormBuilder,
+    private route: ActivatedRoute,
+    private setupEmailService: SetupEmailService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.idConfiguracao = params.get('idConfiguracao');
+    });
+
     this.setupEmailForm = this.form.group({
       nomeServidorSMTP: ['', Validators.required],
       portaEnvio: ['', Validators.required],
@@ -42,7 +56,41 @@ export class SetupEmailComponent {
 
   salvar() {
     if (this.setupEmailForm.valid) {
-      console.log('Formulário Enviado', this.setupEmailForm.value);
+    if(this.idSetupEmail == null){
+      let model = this.preencherModel();
+      this.setupEmailService.Post(model).subscribe(
+        (idConfiguracao: number) => {
+          if(idConfiguracao){
+            this.snackBar.open("Salvo com sucesso.", "Fechar")
+          }
+          else{
+            this.snackBar.open("Erro ao salvar.", "Fechar")
+          }
+        },
+        error => {
+          console.error('Erro na operação', error);
+        }
+      )}
+      else{
+        if(this.idSetupEmail){
+          this.snackBar.open("A edição de dados será disponibilizada no futuro.", "Fechar")
+        }
+      }
     }
+  }
+
+  preencherModel(){
+    const setupModel: SetupEmailModel = {
+      idConfiguracao: parseInt(this.idConfiguracao ?? "", 10),
+      idSetupEmail: this.setupEmailForm.get('idSetupEmail')?.value,
+      nomeServidorSMTP: this.setupEmailForm.get('nomeServidorSMTP')?.value,
+      portaEnvio: parseInt(this.setupEmailForm.get('portaEnvio')?.value ?? '', 10),
+      login: this.setupEmailForm.get('login')?.value,
+      senha: this.setupEmailForm.get('senha')?.value,
+      nomeRemetente: this.setupEmailForm.get('nomeRemetente')?.value,
+      emailRemetente: this.setupEmailForm.get('emailRemetente')?.value,
+    };
+
+    return setupModel;
   }
 }

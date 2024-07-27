@@ -1,7 +1,7 @@
-export interface ConfiguracaoModel {
+export class ConfiguracaoModel {
     idConfiguracao?: number;
-    nomeAplicativo: string;
-    setupEmail: boolean;
-    setupWeb: boolean;
-    setupSMS: boolean;
+    nomeAplicativo!: string;
+    setupEmail!: boolean;
+    setupWeb!: boolean;
+    setupSMS!: boolean;
   }
