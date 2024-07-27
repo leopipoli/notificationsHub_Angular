@@ -43,7 +43,6 @@ export class CadastroComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    debugger
     this.route.paramMap.subscribe(params => {
       this.idConfiguracao = params.get('idConfiguracao');
     });
@@ -51,22 +50,26 @@ export class CadastroComponent implements OnInit{
 
   salvar() {
     if (this.configuracaoForm.valid) {
-    this.cadastroService.Post(this.configuracaoForm.value).subscribe(
-      (idConfiguracao: number) => {
-        debugger
-        if(idConfiguracao){
-          this.snackBar.open("Salvo com sucesso.", "Fechar")
+    if(!this.idConfiguracao){
+      this.cadastroService.Post(this.configuracaoForm.value).subscribe(
+        (idConfiguracao: number) => {
+          if(idConfiguracao){
+            this.snackBar.open("Salvo com sucesso.", "Fechar")
+          }
+          else{
+            this.snackBar.open("Erro ao salvar.", "Fechar")
+          }
+        },
+        error => {
+          console.error('Erro na operação', error);
         }
-        else{
-          this.snackBar.open("Erro ao salvar.", "Fechar")
-        }
-      },
-      error => {
-        console.error('Erro ao obter configuração', error);
-      }
-    )
-
-      console.log('Formulário Enviado', this.configuracaoForm.value);
+      )}
     }
+    else{
+      if(this.idConfiguracao){
+        this.snackBar.open("A edição de dados será disponibilizada no futuro.", "Fechar")
+      }
+    }
+
   }
 }

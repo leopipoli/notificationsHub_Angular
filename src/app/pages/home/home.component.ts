@@ -44,6 +44,10 @@ export class HomeComponent implements OnInit {
   constructor(private homeService: HomeService){}
 
   ngOnInit(){
+    this.updateDataselect();
+  }
+
+  updateDataselect(){
     this.homeService.GetAll().subscribe(
       (data: Array<ConfiguracaoModel>) => {
         this.listConfiguracao = data;
