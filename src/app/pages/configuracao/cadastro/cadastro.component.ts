@@ -5,6 +5,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { CadastroService } from '../services/cadastro.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cadastro',
@@ -27,7 +28,8 @@ export class CadastroComponent {
 
   constructor(
     private form: FormBuilder,
-    private cadastroService: CadastroService
+    private cadastroService: CadastroService,
+    private snackBar: MatSnackBar
   ) {
     this.configuracaoForm = this.form.group({
       nomeAplicativo: ['', [Validators.required]],
@@ -41,7 +43,13 @@ export class CadastroComponent {
     if (this.configuracaoForm.valid) {
     this.cadastroService.Post(this.configuracaoForm.value).subscribe(
       (idConfiguracao: number) => {
-        console.log(idConfiguracao);
+        debugger
+        if(idConfiguracao){
+          this.snackBar.open("Salvo com sucesso.", "Fechar")
+        }
+        else{
+          this.snackBar.open("Erro ao salvar.", "Fechar")
+        }
       },
       error => {
         console.error('Erro ao obter configuração', error);
